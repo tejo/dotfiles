@@ -1,0 +1,8 @@
+env
+.DS_Store
+.netrwhist
+vim/_backup
+vim/_temp
+vim/.netrwhist
+vim/bundle
+.gild

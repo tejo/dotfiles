@@ -1,0 +1,82 @@
+[user]
+	name = Matteo Parmi
+	email = m.parmi@gmail.com
+
+[color]
+  ui = auto
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  whitespace = red reverse
+  new = green bold
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+[core]
+  whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+	excludesfile = /Users/teo/.gitignore
+	editor = vim
+[alias]
+  st = status
+  ci = commit
+  br = branch
+  co = checkout
+  df = diff
+  dc = diff --cached
+  lg = log -p
+  lol = log --graph --decorate --pretty=oneline --abbrev-commit
+  lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+  ls = ls-files
+	switch = !legit switch \"$@\"
+	branches = !legit branches
+	sprout = !legit sprout \"$@\"
+	unpublish = !legit unpublish \"$@\"
+	harvest = !legit harvest \"$@\"
+	sync = !legit sync \"$@\"
+	publish = !legit publish \"$@\"
+	graft = !legit graft \"$@\"
+  cot = !git checkout --track -b "$1" origin/"$1" -
+
+  # Fancy logging.
+  #   h = head
+  #   hp = head with patch
+  #   r = recent commits, only current branch
+  #   ra = recent commits, all reachable refs
+  #   l = all commits, only current branch
+  #   la = all commits, all reachable refs
+  head = !git l -1
+  h = !git head
+  hp = "!. ~/.githelpers && show_git_head"
+  r = !git l -30
+  ra = !git r --all
+  l = "!. ~/.githelpers && pretty_git_log"
+  la = !git l --all
+	g = grep --break --heading --line-number
+
+  # check how the merge of dev into master will go:
+  # git dry dev master
+  dry = "!f() { git merge-tree `git merge-base $2 $1` $2 $1; }; f" 
+
+  # see if there will be any conflicts merging dev into master: 
+  # git conflicts dev master
+  conflicts = "!f() { git merge-tree `git merge-base $2 $1` $2 $1 | grep -A3 'changed in both'; }; f" 
+
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[push]
+	default = current
+[grep]
+	lineNumber = true
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f

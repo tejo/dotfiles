@@ -110,7 +110,9 @@ set scrolloff=3
 " don't use Ex mode, use Q for formatting
 map Q gq
 
-map \\ gc
+" commentary
+vmap \\ gc
+nmap \\ gcc
 
 " clear the search buffer when hitting return
 function! MapCR()

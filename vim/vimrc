@@ -22,9 +22,10 @@ filetype plugin indent on    " required
 
 " color vwilight
 set background=light
-" let g:solarized_termcolors=256
-" colorscheme solarized
 colorscheme molokai
+
+" tree view
+let g:netrw_liststyle=3
 
 set number
 " set relativenumber
@@ -98,11 +99,14 @@ command! Json execute "%!python -m json.tool"
 
 " go stuff
 au BufRead,BufNewFile *.go set filetype=go
+au FileType go nmap gd <Plug>(go-def)
 
 command! Gorun execute "!go run %"
 command! Goimp execute "!goimports -w *.go"
 command! Gotest execute "!go test"
 command! Gobuild execute "!go build"
+
+
 
 " provide some context when editing
 set scrolloff=3

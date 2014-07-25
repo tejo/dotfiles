@@ -22,3 +22,9 @@ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim +PluginInstall +qall
 ```
 
+go tags support
+
+```
+go get -u github.com/jstemmer/gotags
+```
+

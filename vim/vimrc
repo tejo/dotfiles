@@ -19,6 +19,8 @@ Plugin 'mileszs/ack.vim'
 Plugin 'rking/ag.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/syntastic'
+Plugin 'ervandew/supertab'
+Plugin 'godlygeek/tabular'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -26,7 +28,7 @@ filetype plugin indent on    " required
 
 " color vwilight
 set background=light
-colorscheme molokai
+colorscheme Tomorrow
 
 " tree view
 let g:netrw_liststyle=3
@@ -44,6 +46,10 @@ set history=200 " remember more Ex commands
 " for backgrounded buffers
 set hidden
 
+
+"lamer mouse things
+set mouse=a
+set ttymouse=xterm2
 
 "" Whitespace
 set wrap                        " don't wrap lines
@@ -185,18 +191,6 @@ map <Esc>[B <Down>
 
 " copy to system keyboard
 map <leader>y "*y
-" Indent if we're at the beginning of a line. Else, do completion.
-function! InsertTabWrapper()
-  let col = col('.') - 1
-  if !col || getline('.')[col - 1] !~ '\k'
-    return "\<tab>"
-  else
-    return "\<c-p>"
-  endif
-endfunction
-inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-inoremap <s-tab> <c-n>
-
 
 silent !mkdir ~/.vim/_backup > /dev/null 2>&1
 silent !mkdir ~/.vim/_temp > /dev/null 2>&1
@@ -232,7 +226,7 @@ function! RunCurrentTest()
       call SetTestRunner("!cucumber")
       exec g:bjo_test_runner g:bjo_test_file
     elseif match(expand('%'), '_spec\.rb$') != -1
-      call SetTestRunner("!bundle exec rspec")
+      call SetTestRunner("!spring rspec")
       exec g:bjo_test_runner g:bjo_test_file
     else
       call SetTestRunner("!ruby -Itest")
@@ -253,7 +247,7 @@ function! RunCurrentLineInTest()
     call SetTestFileWithLine()
   end
 
-  exec "!bundle exec rspec" g:bjo_test_file . ":" . g:bjo_test_file_line
+  exec "!spring rspec" g:bjo_test_file . ":" . g:bjo_test_file_line
 endfunction
 
 function! SetTestFile()

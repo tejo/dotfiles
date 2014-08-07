@@ -28,3 +28,10 @@ go tags support
 go get -u github.com/jstemmer/gotags
 ```
 
+fzf
+
+```
+git clone https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
+```
+

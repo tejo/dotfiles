@@ -46,3 +46,4 @@ source /usr/local/share/chruby/auto.sh
 export PATH="/usr/local/heroku/bin:$PATH"
 
 source ~/dotfiles/.gild 2> /dev/null
+source ~/.fzf.zsh

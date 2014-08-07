@@ -21,6 +21,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/syntastic'
 Plugin 'ervandew/supertab'
 Plugin 'godlygeek/tabular'
+Plugin 'vim-scripts/ZoomWin'
 
 call vundle#end()            " required
 filetype plugin indent on    " required

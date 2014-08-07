@@ -74,8 +74,8 @@ export PATH=$HOME/src/go/bin:${PATH}:${GOPATH}/bin
 export LC_ALL=en_US.UTF-8
 export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
 
-source /usr/local/share/chruby/chruby.sh
-source /usr/local/share/chruby/auto.sh
+# source /usr/local/share/chruby/chruby.sh
+# source /usr/local/share/chruby/auto.sh
 
 
 export PATH="/usr/local/heroku/bin:$PATH"
@@ -83,3 +83,6 @@ export PATH="/usr/local/heroku/bin:$PATH"
 source ~/dotfiles/.gild 2> /dev/null
 source ~/.fzf.zsh
 
+export TERM='screen-256color'
+
+`setxkbmap -option ctrl:nocaps`

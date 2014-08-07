@@ -107,6 +107,10 @@ endif
 
 "json
 command! Json execute "%!python -m json.tool"
+command! Jsonr !python -m json.tool
+
+nnoremap <leader>json :%!python -m json.tool<CR>
+vnoremap <leader>json :!python -m json.tool<CR>
 
 " go stuff
 au BufRead,BufNewFile *.go set filetype=go
@@ -182,6 +186,7 @@ map <Down>  :echo "no!"<cr>
 
 " ctag
 nnoremap <f5> :!ctags -R<CR>
+nnoremap <f6> :!open -a Google\ Chrome % <CR>
 "map <leader>j g<c-]>
 nnoremap <silent><Leader>j <C-w><C-]><C-w>T
 map <leader>tt <c-t>
@@ -348,3 +353,4 @@ let g:tagbar_type_go = {
     \ 'ctagsbin'  : 'gotags',
     \ 'ctagsargs' : '-sort -silent'
 \ }
+

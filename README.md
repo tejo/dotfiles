@@ -1,6 +1,10 @@
 My dotfiles
 -----------
 
+prezto version:
+
+- follow prezto instructions: `https://github.com/sorin-ionescu/prezto`
+- remove `.zshrc`
 
 clone this repo in your home dir and then link this babies
 
@@ -11,8 +15,6 @@ ln -s dotfiles/gitconfig .gitconfig
 ln -s dotfiles/tmux.conf .tmux.conf
 ln -s dotfiles/vim .vim
 ln -s dotfiles/ctags .ctags
-mkdir dotfiles/vim/_backup
-mkdir dotfiles/vim/_temp
 ```
 
 vim setup

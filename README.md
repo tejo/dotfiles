@@ -28,3 +28,6 @@ go tags support
 go get -u github.com/jstemmer/gotags
 ```
 
+cool fonts
+```
+https://github.com/hbin/top-programming-fonts

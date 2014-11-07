@@ -12,16 +12,22 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-vinegar'
+Plugin 'tpope/vim-dispatch'
+Plugin 'tpope/vim-eunuch'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-repeat'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'kien/ctrlp.vim'
 Plugin 'bling/vim-airline'
-Plugin 'mileszs/ack.vim'
 Plugin 'rking/ag.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/syntastic'
 Plugin 'ervandew/supertab'
 Plugin 'godlygeek/tabular'
 Plugin 'vim-scripts/ZoomWin'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'bronson/vim-visual-star-search'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -30,6 +36,8 @@ filetype plugin indent on    " required
 " color vwilight
 set background=light
 colorscheme Tomorrow
+
+nnoremap <F9> :Dispatch<CR>
 
 " tree view
 let g:netrw_liststyle=3
@@ -142,7 +150,7 @@ call MapCR()
 let mapleader=","
 noremap \ ,
 
-nmap F :Ack<space>
+nmap F :Ag<cr>
 map <leader>f :CtrlP<cr>
 map <leader>b ::CtrlPBuffer<cr>
 let g:ctrlp_custom_ignore = {
@@ -150,6 +158,14 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll)$',
   \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
   \ }
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+
+" use ag for recursive searching
+nnoremap <leader>* :call ag#Ag('grep', '--literal ' .  shellescape(expand("<cword>")))<CR>
+vnoremap <leader>* :<C-u>call VisualStarSearchSet('/', 'raw')<CR>:call ag#Ag('grep', '--literal ' . shellescape(@/))<CR>
 
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 

@@ -42,6 +42,10 @@
 	publish = !legit publish \"$@\"
 	graft = !legit graft \"$@\"
   cot = !git checkout --track -b "$1" origin/"$1" -
+  save = !git add -A && git commit -m 'SAVEPOINT'
+  undo = reset HEAD~1 --mixed
+  amend = commit -a --amend
+  bclean = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs -r git branch -d; }; f"
 
   # Fancy logging.
   #   h = head

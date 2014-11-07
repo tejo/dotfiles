@@ -8,12 +8,15 @@ alias e="vim"
 alias be="bundle exec"
 alias plist='ps -axcr -o "pid,pcpu,pmem,time,comm"'
 alias gs="git status"
+alias s="git status -sb"
 alias gc="git checkout"
 alias gb="git branch"
+alias gpr="git pull --rebase"
 alias ls="ls -G"
 alias tr="tmux attach"
 alias h="history | grep"
 alias gplay="open http://localhost:3999/ && cd $GOROOT/misc/goplay && go run goplay.go"
+alias sc="screencapture -i ~/Desktop/$(date +"%m_%d_%Y_%H-%M-%S").png"
 
 function gitCheckoutAndTrack() {
   git checkout --track -b "$1" origin/"$1"

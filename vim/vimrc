@@ -28,6 +28,7 @@ Plugin 'godlygeek/tabular'
 Plugin 'vim-scripts/ZoomWin'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'bronson/vim-visual-star-search'
+Plugin 'terryma/vim-multiple-cursors'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -35,7 +36,7 @@ filetype plugin indent on    " required
 
 " color vwilight
 set background=light
-colorscheme Tomorrow
+colorscheme kalisi
 
 nnoremap <F9> :Dispatch<CR>
 

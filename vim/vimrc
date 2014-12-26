@@ -11,7 +11,6 @@ Plugin 'fatih/vim-go'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-vinegar'
 Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-eunuch'
 Plugin 'tpope/vim-surround'
@@ -23,12 +22,21 @@ Plugin 'bling/vim-airline'
 Plugin 'rking/ag.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/nerdtree'
 Plugin 'ervandew/supertab'
 Plugin 'godlygeek/tabular'
 Plugin 'vim-scripts/ZoomWin'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'bronson/vim-visual-star-search'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'Peeja/vim-cdo'
+
+" nerdtree
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+let NERDTreeMouseMode=2
+map - :NERDTreeToggle<CR>
+
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -114,12 +122,6 @@ if has("autocmd")
   au BufNewFile,BufRead *.{md,markdown,html,xml} sy match Comment /\%^---\_.\{-}---$/
 endif
 
-"json
-command! Json execute "%!python -m json.tool"
-command! Jsonr !python -m json.tool
-
-nnoremap <leader>json :%!python -m json.tool<CR>
-vnoremap <leader>json :!python -m json.tool<CR>
 
 " go stuff
 au BufRead,BufNewFile *.go set filetype=go
@@ -163,6 +165,8 @@ let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
+let g:ctrlp_clear_cache_on_exit = 0
+autocmd VimEnter * CtrlP
 
 " use ag for recursive searching
 nnoremap <leader>* :call ag#Ag('grep', '--literal ' .  shellescape(expand("<cword>")))<CR>
@@ -175,10 +179,11 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 set wildignore+=tmp/**,*.rbc,.rbx,*.scssc,*.sassc
 
 " folding
-set foldmethod=manual
+set foldmethod=syntax
+set foldlevelstart=20
 noremap <silent> <Space> za
 vnoremap <silent> <Space> za<Esc>
-map <Leader>fi :set foldmethod=indent<cr>
+map <Leader>fs :set foldmethod=syntax<cr>
 map <Leader>fm :set foldmethod=manual<cr>
 
 
@@ -208,6 +213,8 @@ nnoremap <f6> :!open -a Google\ Chrome % <CR>
 nnoremap <silent><Leader>j <C-w><C-]><C-w>T
 map <leader>tt <c-t>
 set tags+=gems.tags
+
+nnoremap <leader>. :CtrlPTag<cr>
 
 " command-t tmux fix
 map <Esc>[B <Down>

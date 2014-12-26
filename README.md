@@ -35,3 +35,7 @@ git clone https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 ```
 
+=======
+cool fonts
+```
+https://github.com/hbin/top-programming-fonts

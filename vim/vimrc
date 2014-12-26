@@ -11,16 +11,32 @@ Plugin 'fatih/vim-go'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-vinegar'
+Plugin 'tpope/vim-dispatch'
+Plugin 'tpope/vim-eunuch'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-repeat'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'kien/ctrlp.vim'
 Plugin 'bling/vim-airline'
-Plugin 'mileszs/ack.vim'
 Plugin 'rking/ag.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/nerdtree'
 Plugin 'ervandew/supertab'
 Plugin 'godlygeek/tabular'
+Plugin 'vim-scripts/ZoomWin'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'bronson/vim-visual-star-search'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'Peeja/vim-cdo'
+
+" nerdtree
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+let NERDTreeMouseMode=2
+map - :NERDTreeToggle<CR>
+
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -28,7 +44,9 @@ filetype plugin indent on    " required
 
 " color vwilight
 set background=light
-colorscheme Tomorrow
+colorscheme kalisi
+
+nnoremap <F9> :Dispatch<CR>
 
 " tree view
 let g:netrw_liststyle=3
@@ -104,8 +122,6 @@ if has("autocmd")
   au BufNewFile,BufRead *.{md,markdown,html,xml} sy match Comment /\%^---\_.\{-}---$/
 endif
 
-"json
-command! Json execute "%!python -m json.tool"
 
 " go stuff
 au BufRead,BufNewFile *.go set filetype=go
@@ -137,7 +153,7 @@ call MapCR()
 let mapleader=","
 noremap \ ,
 
-nmap F :Ack<space>
+nmap F :Ag<cr>
 map <leader>f :CtrlP<cr>
 map <leader>b ::CtrlPBuffer<cr>
 let g:ctrlp_custom_ignore = {
@@ -145,6 +161,16 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll)$',
   \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
   \ }
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+let g:ctrlp_clear_cache_on_exit = 0
+autocmd VimEnter * CtrlP
+
+" use ag for recursive searching
+nnoremap <leader>* :call ag#Ag('grep', '--literal ' .  shellescape(expand("<cword>")))<CR>
+vnoremap <leader>* :<C-u>call VisualStarSearchSet('/', 'raw')<CR>:call ag#Ag('grep', '--literal ' . shellescape(@/))<CR>
 
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 
@@ -153,10 +179,11 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 set wildignore+=tmp/**,*.rbc,.rbx,*.scssc,*.sassc
 
 " folding
-set foldmethod=manual
+set foldmethod=syntax
+set foldlevelstart=20
 noremap <silent> <Space> za
 vnoremap <silent> <Space> za<Esc>
-map <Leader>fi :set foldmethod=indent<cr>
+map <Leader>fs :set foldmethod=syntax<cr>
 map <Leader>fm :set foldmethod=manual<cr>
 
 
@@ -181,10 +208,13 @@ map <Down>  :echo "no!"<cr>
 
 " ctag
 nnoremap <f5> :!ctags -R<CR>
+nnoremap <f6> :!open -a Google\ Chrome % <CR>
 "map <leader>j g<c-]>
 nnoremap <silent><Leader>j <C-w><C-]><C-w>T
 map <leader>tt <c-t>
 set tags+=gems.tags
+
+nnoremap <leader>. :CtrlPTag<cr>
 
 " command-t tmux fix
 map <Esc>[B <Down>
@@ -347,3 +377,4 @@ let g:tagbar_type_go = {
     \ 'ctagsbin'  : 'gotags',
     \ 'ctagsargs' : '-sort -silent'
 \ }
+

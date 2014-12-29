@@ -6,30 +6,32 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
-Plugin 'tpope/vim-fugitive'
+Plugin 'Peeja/vim-cdo'
+Plugin 'SirVer/ultisnips'
+Plugin 'bling/vim-airline'
+Plugin 'bronson/vim-visual-star-search'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'ervandew/supertab'
 Plugin 'fatih/vim-go'
+Plugin 'godlygeek/tabular'
+Plugin 'honza/vim-snippets'
+Plugin 'kien/ctrlp.vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'rking/ag.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-dispatch'
+Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-eunuch'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
-Plugin 'tpope/vim-repeat'
 Plugin 'vim-ruby/vim-ruby'
-Plugin 'kien/ctrlp.vim'
-Plugin 'bling/vim-airline'
-Plugin 'rking/ag.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'scrooloose/syntastic'
-Plugin 'scrooloose/nerdtree'
-Plugin 'ervandew/supertab'
-Plugin 'godlygeek/tabular'
 Plugin 'vim-scripts/ZoomWin'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'bronson/vim-visual-star-search'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'Peeja/vim-cdo'
 
 " nerdtree
 autocmd StdinReadPre * let s:std_in=1
@@ -38,8 +40,9 @@ let NERDTreeMouseMode=2
 map - :NERDTreeToggle<CR>
 
 
-call vundle#end()            " required
-filetype plugin indent on    " required
+" required from vundle
+call vundle#end()
+filetype plugin indent on
 
 
 " color vwilight
@@ -132,6 +135,17 @@ command! Goimp execute "!goimports -w *.go"
 command! Gotest execute "!go test"
 command! Gobuild execute "!go build"
 
+let g:go_fmt_command = "goimports"
+au FileType go nmap <Leader>s <Plug>(go-implements)
+au FileType go nmap <Leader>i <Plug>(go-info)
+au FileType go nmap <Leader>gd <Plug>(go-doc-browser)
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+
+autocmd FileType * call UltiSnips#FileTypeChanged()
+
+
 
 
 " provide some context when editing
@@ -179,7 +193,7 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 set wildignore+=tmp/**,*.rbc,.rbx,*.scssc,*.sassc
 
 " folding
-set foldmethod=syntax
+set foldmethod=indent
 set foldlevelstart=20
 noremap <silent> <Space> za
 vnoremap <silent> <Space> za<Esc>

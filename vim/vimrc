@@ -7,7 +7,9 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 Plugin 'Peeja/vim-cdo'
+Plugin 'Raimondi/delimitMate'
 Plugin 'SirVer/ultisnips'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'bling/vim-airline'
 Plugin 'bronson/vim-visual-star-search'
 Plugin 'christoomey/vim-tmux-navigator'
@@ -29,7 +31,6 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-unimpaired'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'vim-scripts/ZoomWin'
 
@@ -144,6 +145,16 @@ let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 
 autocmd FileType * call UltiSnips#FileTypeChanged()
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 
 
@@ -220,6 +231,15 @@ map <Right> gt
 map <Up>    :echo "no!"<cr>
 map <Down>  :echo "no!"<cr>
 
+
+" mappings
+map! jj <esc>
+nmap oo o<esc>k
+nmap OO O<esc>j
+nmap /" cs'"
+nmap /' cs"'
+
+
 " ctag
 nnoremap <f5> :!ctags -R<CR>
 nnoremap <f6> :!open -a Google\ Chrome % <CR>
@@ -227,6 +247,7 @@ nnoremap <f6> :!open -a Google\ Chrome % <CR>
 nnoremap <silent><Leader>j <C-w><C-]><C-w>T
 map <leader>tt <c-t>
 set tags+=gems.tags
+map _ :TagbarToggle<CR>
 
 nnoremap <leader>. :CtrlPTag<cr>
 
@@ -236,10 +257,7 @@ map <Esc>[B <Down>
 " copy to system keyboard
 map <leader>y "*y
 
-silent !mkdir ~/.vim/_backup > /dev/null 2>&1
-silent !mkdir ~/.vim/_temp > /dev/null 2>&1
-set backupdir=~/.vim/_backup    " where to put backup files.
-set directory=~/.vim/_temp      " where to put swap files.
+set nobackup
 
 if has("statusline") && !&cp
   set laststatus=2  " always show the status bar

@@ -21,8 +21,10 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'scrooloose/syntastic'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-endwise'
@@ -35,10 +37,12 @@ Plugin 'vim-ruby/vim-ruby'
 Plugin 'vim-scripts/ZoomWin'
 
 " nerdtree
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 let NERDTreeMouseMode=2
-map - :NERDTreeToggle<CR>
+map - :NERDTreeTabsToggle<CR>
+let g:nerdtree_tabs_open_on_console_startup = 1
+let g:nerdtree_tabs_focus_on_files = 1
 
 
 " required from vundle
@@ -191,7 +195,6 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 let g:ctrlp_clear_cache_on_exit = 0
-autocmd VimEnter * CtrlP
 
 " use ag for recursive searching
 nnoremap <leader>* :call ag#Ag('grep', '--literal ' .  shellescape(expand("<cword>")))<CR>
@@ -258,6 +261,8 @@ map <Esc>[B <Down>
 map <leader>y "*y
 
 set nobackup
+set nowritebackup
+set noswapfile
 
 if has("statusline") && !&cp
   set laststatus=2  " always show the status bar

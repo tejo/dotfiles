@@ -20,8 +20,7 @@ ln -s dotfiles/ctags .ctags
 vim setup
 
 ```
-git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-vim +PluginInstall +qall
+vim +PlugInstall
 ```
 
 go tags support

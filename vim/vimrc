@@ -37,6 +37,7 @@ Plug 'tpope/vim-surround'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/ZoomWin'
 Plug 'freeo/vim-kalisi'
+Plug 'mhinz/vim-startify'
 
 call plug#end()
 
@@ -48,6 +49,12 @@ let NERDTreeMouseMode=2
 map - :NERDTreeTabsToggle<CR>
 let g:nerdtree_tabs_open_on_console_startup = 1
 let g:nerdtree_tabs_focus_on_files = 1
+
+autocmd VimEnter *
+      \   if !argc()
+      \ |   Startify
+      \ |   wincmd w
+      \ | endif
 
 
 filetype plugin indent on

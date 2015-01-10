@@ -23,6 +23,9 @@ function gitCheckoutAndTrack() {
 }
 alias gcot=gitCheckoutAndTrack
 
+alias start_services="mux start services"
+alias start_tuna="mux start tuna"
+alias stop_tuna="sudo killall ruby && tmux kill-session -t tuna"
 
 # # Path to your oh-my-zsh configuration.
 # export ZSH=$HOME/.oh-my-zsh

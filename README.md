@@ -1,20 +1,21 @@
 My dotfiles
 -----------
 
-prezto version:
-
-- follow prezto instructions: `https://github.com/sorin-ionescu/prezto`
-- remove `.zshrc`
-
-clone this repo in your home dir and then link this babies
+antigen
 
 ```
-ln -s dotfiles/vim/vimrc .vimrc
-ln -s dotfiles/zshrc .zshrc
-ln -s dotfiles/gitconfig .gitconfig
-ln -s dotfiles/tmux.conf .tmux.conf
-ln -s dotfiles/vim .vim
-ln -s dotfiles/ctags .ctags
+git clone https://github.com/zsh-users/antigen.git
+```
+
+clone this repo in your home dir and then:
+
+```
+ln -f -s dotfiles/vim/vimrc .vimrc
+ln -f -s dotfiles/zshrc .zshrc
+ln -f -s dotfiles/gitconfig .gitconfig
+ln -f -s dotfiles/tmux.conf .tmux.conf
+ln -f -s dotfiles/vim .vim
+ln -f -s dotfiles/ctags .ctags
 ```
 
 vim setup
@@ -36,7 +37,7 @@ git clone https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 ```
 
-=======
-cool fonts
+programming fonts
+
 ```
-https://github.com/hbin/top-programming-fonts
+(https://github.com/hbin/top-programming-fonts)[https://github.com/hbin/top-programming-fonts]

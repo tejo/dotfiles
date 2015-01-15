@@ -49,6 +49,7 @@ let NERDTreeMouseMode=2
 map - :NERDTreeTabsToggle<CR>
 let g:nerdtree_tabs_open_on_console_startup = 1
 let g:nerdtree_tabs_focus_on_files = 1
+let g:nerdtree_tabs_startup_cd = 0
 
 autocmd VimEnter *
       \   if !argc()
@@ -243,12 +244,14 @@ map <Down>  :echo "no!"<cr>
 
 " mappings
 map! jj <esc>
+map! jjj <esc>:update<cr>
 nmap oo o<esc>k
 nmap OO O<esc>j
 nmap /" cs'"
 nmap /' cs"'
 nmap <silent> <Leader>w :update<CR>
 nmap <silent> <Leader>q :quit<CR>
+nmap <silent> <Leader>d :bd<CR>
 command! Q q
 command! W w
 

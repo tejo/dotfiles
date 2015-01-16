@@ -13,6 +13,13 @@ antigen bundle command-not-found
 
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-history-substring-search
+
+# bind UP and DOWN arrow keys
+zmodload zsh/terminfo
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+
 
 # Load the theme.
 antigen theme candy
@@ -64,7 +71,7 @@ unsetopt correct
 unsetopt correct_all
 
 
-set -o vi
+# set -o vi
 
 setopt auto_cd
 cdpath=($HOME/work $HOME/)

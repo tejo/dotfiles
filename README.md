@@ -1,7 +1,7 @@
 My dotfiles
 -----------
 
-antigen
+clone antigen in your home dir
 
 ```
 git clone https://github.com/zsh-users/antigen.git

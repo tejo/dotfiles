@@ -38,8 +38,12 @@ Plug 'https://github.com/idanarye/vim-merginal'
 Plug 'gregsexton/gitv'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/ZoomWin'
-Plug 'freeo/vim-kalisi'
 Plug 'mhinz/vim-startify'
+Plug 'myusuf3/numbers.vim'
+" colors
+Plug 'w0ng/vim-hybrid'
+Plug 'sickill/vim-monokai'
+Plug 'twerth/ir_black'
 
 call plug#end()
 
@@ -61,7 +65,7 @@ autocmd VimEnter *
 
 
 filetype plugin indent on
-colorscheme kalisi
+colorscheme hybrid
 
 nnoremap <F9> :Dispatch<CR>
 

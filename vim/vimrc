@@ -40,6 +40,8 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/ZoomWin'
 Plug 'mhinz/vim-startify'
 Plug 'myusuf3/numbers.vim'
+Plug 'jbgutierrez/vim-partial'
+Plug 'janko-m/vim-test'
 " colors
 Plug 'w0ng/vim-hybrid'
 Plug 'sickill/vim-monokai'
@@ -62,6 +64,9 @@ autocmd VimEnter *
       \ |   Startify
       \ |   wincmd w
       \ | endif
+
+let g:startify_change_to_dir = 0
+autocmd User Startified setlocal buftype=
 
 
 filetype plugin indent on
@@ -146,17 +151,26 @@ endif
 
 " go stuff
 au BufRead,BufNewFile *.go set filetype=go
-au FileType go nmap gd <Plug>(go-def)
 
-command! Gorun execute "!go run %"
-command! Goimp execute "!goimports -w *.go"
-command! Gotest execute "!go test"
-command! Gobuild execute "!go build"
 
 let g:go_fmt_command = "goimports"
 au FileType go nmap <Leader>s <Plug>(go-implements)
 au FileType go nmap <Leader>i <Plug>(go-info)
-au FileType go nmap <Leader>gd <Plug>(go-doc-browser)
+
+au FileType go nmap <Leader>gd <Plug>(go-doc)
+au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
+
+" au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>gb <Plug>(go-build)
+au FileType go nmap <leader>gt <Plug>(go-test)
+au FileType go nmap <leader>c <Plug>(go-coverage)
+
+au FileType go nmap <Leader>ds <Plug>(go-def-split)
+au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+" au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+au FileType go nmap gd <Plug>(go-def-tab)
+
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
@@ -226,6 +240,11 @@ noremap <silent> <Space> za
 vnoremap <silent> <Space> za<Esc>
 map <Leader>fs :set foldmethod=syntax<cr>
 map <Leader>fm :set foldmethod=manual<cr>
+set nocursorcolumn
+set nocursorline
+syntax sync minlines=256
+set synmaxcol=300
+set re=1
 
 
 nnoremap <leader><leader> <c-^>
@@ -301,59 +320,9 @@ endif
 
 
 " test stuff
-map <Leader>t :call RunCurrentTest()<CR>
-
-function! RunCurrentTest()
-  let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.rb\)$') != -1
-  if in_test_file
-    call SetTestFile()
-
-    if match(expand('%'), '\.feature$') != -1
-      call SetTestRunner("!cucumber")
-      exec g:bjo_test_runner g:bjo_test_file
-    elseif match(expand('%'), '_spec\.rb$') != -1
-      call SetTestRunner("!spring rspec")
-      exec g:bjo_test_runner g:bjo_test_file
-    else
-      call SetTestRunner("!ruby -Itest")
-      exec g:bjo_test_runner g:bjo_test_file
-    endif
-  else
-    exec g:bjo_test_runner g:bjo_test_file
-  endif
-endfunction
-
-function! SetTestRunner(runner)
-  let g:bjo_test_runner=a:runner
-endfunction
-
-function! RunCurrentLineInTest()
-  let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.rb\)$') != -1
-  if in_test_file
-    call SetTestFileWithLine()
-  end
-
-  exec "!spring rspec" g:bjo_test_file . ":" . g:bjo_test_file_line
-endfunction
-
-function! SetTestFile()
-  let g:bjo_test_file=@%
-endfunction
-
-function! SetTestFileWithLine()
-  let g:bjo_test_file=@%
-  let g:bjo_test_file_line=line(".")
-endfunction
-
-function! CorrectTestRunner()
-  if match(expand('%'), '\.feature$') != -1
-    return "cucumber"
-  elseif match(expand('%'), '_spec\.rb$') != -1
-    return "bundle exec rspec spec"
-  else
-    return "ruby"
-  endif
-endfunction
+map <Leader>T :TestNearest<CR>
+map <Leader>t :TestFile<CR>
+map <leader>r :NERDTreeFind<cr>
 
 " file:line
 " Avoid installing twice or when in unsupported Vim version.
@@ -433,4 +402,5 @@ let g:tagbar_type_go = {
     \ 'ctagsbin'  : 'gotags',
     \ 'ctagsargs' : '-sort -silent'
 \ }
+
 

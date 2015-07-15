@@ -1,27 +1,22 @@
 My dotfiles
 -----------
 
-clone antigen in your home dir
-
-```
-git clone https://github.com/zsh-users/antigen.git
-```
-
 clone this repo in your home dir and then:
 
 ```
-ln -f -s dotfiles/vim/vimrc .vimrc
-ln -f -s dotfiles/zshrc .zshrc
+ln -s dotfiles/bashrc .bashrc
+ln -s dotfiles/bashrc .bash_profile
+ln -f -s dotfiles/vim/vimrc .nvimrc
+ln -f -s dotfiles/vim .nvim
 ln -f -s dotfiles/gitconfig .gitconfig
 ln -f -s dotfiles/tmux.conf .tmux.conf
-ln -f -s dotfiles/vim .vim
 ln -f -s dotfiles/ctags .ctags
 ```
 
-vim setup
+nvim setup
 
 ```
-vim +PlugInstall
+nvim +PlugInstall
 ```
 
 go tags support

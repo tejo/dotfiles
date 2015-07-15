@@ -13,7 +13,6 @@ Plug 'SirVer/ultisnips'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
 Plug 'bling/vim-airline'
 Plug 'bronson/vim-visual-star-search'
-Plug 'christoomey/vim-tmux-navigator'
 Plug 'ervandew/supertab'
 Plug 'fatih/vim-go'
 Plug 'godlygeek/tabular'
@@ -25,14 +24,10 @@ Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'scrooloose/syntastic'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
-Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'https://github.com/idanarye/vim-merginal'
 Plug 'gregsexton/gitv'
@@ -40,9 +35,10 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/ZoomWin'
 Plug 'mhinz/vim-startify'
 Plug 'myusuf3/numbers.vim'
-Plug 'jbgutierrez/vim-partial'
-Plug 'janko-m/vim-test'
+Plug 'kassio/neoterm'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 " colors
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'w0ng/vim-hybrid'
 Plug 'sickill/vim-monokai'
 Plug 'twerth/ir_black'
@@ -93,7 +89,7 @@ set hidden
 
 "lamer mouse things
 set mouse=a
-set ttymouse=xterm2
+" set ttymouse=xterm2
 
 "" Whitespace
 set wrap                        " don't wrap lines
@@ -210,7 +206,7 @@ let mapleader=","
 noremap \ ,
 
 nmap F :Ag<cr>
-map <leader>f :CtrlP<cr>
+map <leader>f :FZF<cr>
 map <leader>b ::CtrlPBuffer<cr>
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
@@ -274,9 +270,9 @@ nmap oo o<esc>k
 nmap OO O<esc>j
 nmap /" cs'"
 nmap /' cs"'
-nmap <silent> <Leader>w :update<CR>
+nmap <silent> <Leader>w :write<CR>
 nmap <silent> <Leader>q :quit<CR>
-nmap <silent> <Leader>d :bd<CR>
+nmap <silent> <Leader>d :bd!<CR>
 command! Q q
 command! W w
 
@@ -320,8 +316,9 @@ endif
 
 
 " test stuff
-map <Leader>T :TestNearest<CR>
-map <Leader>t :TestFile<CR>
+map <Leader>TT :call neoterm#test#run('suite')<CR>
+map <Leader>T :call neoterm#test#run('file')<CR>
+map <Leader>t :call neoterm#test#run('current')<CR>
 map <leader>r :NERDTreeFind<cr>
 
 " file:line

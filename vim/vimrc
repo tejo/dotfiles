@@ -6,11 +6,9 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'gmarik/Vundle.vim'
-Plug 'Peeja/vim-cdo'
 Plug 'Raimondi/delimitMate'
 Plug 'SirVer/ultisnips'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 Plug 'bling/vim-airline'
 Plug 'bronson/vim-visual-star-search'
 Plug 'ervandew/supertab'
@@ -38,15 +36,12 @@ Plug 'myusuf3/numbers.vim'
 Plug 'kassio/neoterm'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 " colors
-" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'w0ng/vim-hybrid'
-Plug 'sickill/vim-monokai'
-Plug 'twerth/ir_black'
 
 call plug#end()
 
 syntax enable
-set encoding=utf-8
+" set encoding=utf-8
 
 " nerdtree
 let NERDTreeMouseMode=2
@@ -66,9 +61,9 @@ autocmd User Startified setlocal buftype=
 
 
 filetype plugin indent on
+let g:hybrid_use_Xresources = 1
+set background=dark
 colorscheme hybrid
-
-nnoremap <F9> :Dispatch<CR>
 
 " tree view
 let g:netrw_liststyle=3
@@ -255,6 +250,16 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
+
+tnoremap <c-j> <C-\><C-n><C-w>h
+tnoremap <c-k> <C-\><C-n><C-w>j
+tnoremap <c-h> <C-\><C-n><C-w>k
+tnoremap <c-l> <C-\><C-n><C-w>l
+
+"terminal mapping
+tnoremap <Esc> <C-\><C-n>
+tnoremap jj <C-\><C-n>
+
 
 " disable cursor keys in normal mode
 map <Left>  gT

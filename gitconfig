@@ -71,6 +71,7 @@
   # see if there will be any conflicts merging dev into master: 
   # git conflicts dev master
   conflicts = "!f() { git merge-tree `git merge-base $2 $1` $2 $1 | grep -A3 'changed in both'; }; f" 
+	pushf = push --force-with-lease
 
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
@@ -87,3 +88,8 @@
 	smudge = git-media-smudge %f
 [status]
 	displaycommentprefix = false
+[commit]
+  template = ~/.gitmessage
+[branch]
+  autosetupmerge = always
+  autosetuprebase = always

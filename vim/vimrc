@@ -8,19 +8,18 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'Raimondi/delimitMate'
 Plug 'SirVer/ultisnips'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
+Plug 'Shougo/deoplete.nvim'
 Plug 'bling/vim-airline'
 Plug 'bronson/vim-visual-star-search'
 Plug 'ervandew/supertab'
 Plug 'fatih/vim-go'
 Plug 'godlygeek/tabular'
 Plug 'honza/vim-snippets'
-Plug 'kien/ctrlp.vim'
 Plug 'majutsushi/tagbar'
 Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
-Plug 'scrooloose/syntastic'
+Plug 'benekastah/neomake'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
@@ -35,13 +34,17 @@ Plug 'mhinz/vim-startify'
 Plug 'myusuf3/numbers.vim'
 Plug 'kassio/neoterm'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+Plug 'junegunn/fzf.vim'
 " colors
 Plug 'w0ng/vim-hybrid'
 
 call plug#end()
 
 syntax enable
-" set encoding=utf-8
+
+autocmd! BufWritePost * Neomake
+
+let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
 
 " nerdtree
 let NERDTreeMouseMode=2
@@ -167,10 +170,11 @@ let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 
 autocmd FileType * call UltiSnips#FileTypeChanged()
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_ignore_case = 'ignorecase'
+inoremap <silent><expr> <Tab>
+  \ pumvisible() ? "\<C-n>" :
+  \ deoplete#mappings#manual_complete()
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " better key bindings for UltiSnipsExpandTrigger
@@ -201,18 +205,8 @@ let mapleader=","
 noremap \ ,
 
 nmap F :Ag<cr>
-map <leader>f :FZF<cr>
-map <leader>b ::CtrlPBuffer<cr>
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
-  \ }
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-endif
-let g:ctrlp_clear_cache_on_exit = 0
+map <leader>f :Files<cr>
+map <leader>b :Buffers<cr>
 
 " use ag for recursive searching
 nnoremap <leader>* :call ag#Ag('grep', '--literal ' .  shellescape(expand("<cword>")))<CR>
@@ -283,18 +277,7 @@ command! W w
 
 
 " ctag
-nnoremap <f5> :!ctags -R<CR>
-nnoremap <f6> :!open -a Google\ Chrome % <CR>
-"map <leader>j g<c-]>
-nnoremap <silent><Leader>j <C-w><C-]><C-w>T
-map <leader>tt <c-t>
-set tags+=gems.tags
 map _ :TagbarToggle<CR>
-
-nnoremap <leader>. :CtrlPTag<cr>
-
-" command-t tmux fix
-map <Esc>[B <Down>
 
 " copy to system keyboard
 map <leader>y "*y
@@ -324,6 +307,7 @@ endif
 map <Leader>TT :call neoterm#test#run('suite')<CR>
 map <Leader>T :call neoterm#test#run('file')<CR>
 map <Leader>t :call neoterm#test#run('current')<CR>
+map <Leader>tt :call neoterm#test#rerun()<CR>
 map <leader>r :NERDTreeFind<cr>
 
 " file:line
@@ -374,35 +358,3 @@ endfunction
 
 autocmd! BufNewFile *:* nested call s:gotoline()
 autocmd! BufRead *:* nested call s:gotoline()
-
-
-" tagbar
-let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [
-        \ 'p:package',
-        \ 'i:imports:1',
-        \ 'c:constants',
-        \ 'v:variables',
-        \ 't:types',
-        \ 'n:interfaces',
-        \ 'w:fields',
-        \ 'e:embedded',
-        \ 'm:methods',
-        \ 'r:constructor',
-        \ 'f:functions'
-    \ ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : {
-        \ 't' : 'ctype',
-        \ 'n' : 'ntype'
-    \ },
-    \ 'scope2kind' : {
-        \ 'ctype' : 't',
-        \ 'ntype' : 'n'
-    \ },
-    \ 'ctagsbin'  : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-\ }
-
-

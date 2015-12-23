@@ -23,7 +23,6 @@ export GOROOT=$HOME/src/go
 export GOPATH=$HOME/gopath
 export PATH=$HOME/src/go/bin:${PATH}:${GOPATH}/bin
 export LC_ALL=en_US.UTF-8
-export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
 
 source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh

@@ -308,6 +308,8 @@ map <Leader>TT :call neoterm#test#run('suite')<CR>
 map <Leader>T :call neoterm#test#run('file')<CR>
 map <Leader>t :call neoterm#test#run('current')<CR>
 map <Leader>tt :call neoterm#test#rerun()<CR>
+let g:neoterm_rspec_lib_cmd = "DEBUG_TEST=1 bin/rspec"
+
 map <leader>r :NERDTreeFind<cr>
 
 " file:line

@@ -86,3 +86,6 @@ PS1="\[${BOLD}${MAGENTA}\]\u\[$WHITE\]@\[$ORANGE\]\h\[$GREEN\]\w\[$WHITE\]\$([[ 
 
 eval "$(thefuck-alias)"
 
+
+
+. /Users/teo/torch/install/bin/torch-activate

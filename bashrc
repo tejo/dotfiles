@@ -1,4 +1,3 @@
-alias e="nvim"
 alias be="bundle exec"
 alias plist='ps -axcr -o "pid,pcpu,pmem,time,comm"'
 alias gs="git status"
@@ -19,22 +18,8 @@ alias gcot=gitCheckoutAndTrack
 
 
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/npm/bin:${PATH}
-export GOROOT=$HOME/src/go
-export GOPATH=$HOME/gopath
-export PATH=$HOME/src/go/bin:${PATH}:${GOPATH}/bin
+export GOPATH=$HOME
 export LC_ALL=en_US.UTF-8
-
-source /usr/local/share/chruby/chruby.sh
-source /usr/local/share/chruby/auto.sh
-
-export PATH="/usr/local/heroku/bin:$PATH"
-
-alias backend_keys='ruby /Users/teo/gild/Tuna/gildsource/conf/config-broker-config.rb'
-
-source ~/dotfiles/.gild 2> /dev/null
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
 
 # Avoid duplicates
 export HISTCONTROL=ignoredups:erasedups  
@@ -84,8 +69,5 @@ parse_git_branch () {
  
 PS1="\[${BOLD}${MAGENTA}\]\u\[$WHITE\]@\[$ORANGE\]\h\[$GREEN\]\w\[$WHITE\]\$([[ -n \$(git branch 2> /dev/null) ]] && echo \" ~ \")\[$PURPLE\]\$(parse_git_branch)\[$WHITE\]\n\$ \[$RESET\]"
 
-eval "$(thefuck-alias)"
-
-
-
-. /Users/teo/torch/install/bin/torch-activate
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+source ~/.profile

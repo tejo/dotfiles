@@ -17,9 +17,9 @@ alias gcot=gitCheckoutAndTrack
 
 
 
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/npm/bin:${PATH}
 export GOPATH=$HOME
 export LC_ALL=en_US.UTF-8
+export PATH=${HOME}/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/npm/bin:${PATH}
 
 # Avoid duplicates
 export HISTCONTROL=ignoredups:erasedups  
